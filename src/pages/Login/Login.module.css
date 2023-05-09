@@ -54,6 +54,13 @@
   font-weight: 600;
   background: #00a0df;
   margin: 21px 0px 0px 0px;
+  cursor: pointer;
+}
+
+.container button:disabled {
+  color: rgb(200, 200, 200);
+  background-color: #f8f8f8;
+  cursor: not-allowed;
 }
 
 .container a {

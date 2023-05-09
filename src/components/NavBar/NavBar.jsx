@@ -18,7 +18,9 @@ const NavBar = ({ user, handleLogout }) => {
 
   const protectedLinks = (
     <ul>
-      <li><NavLink to="" onClick={handleLogout}>LOG OUT</NavLink></li>
+      <li>
+        <NavLink to="/auth/logout" onClick={handleLogout}>LOG OUT</NavLink>
+      </li>
     </ul>
   )
 

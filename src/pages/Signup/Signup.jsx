@@ -106,10 +106,10 @@ const Signup = ({ handleAuthEvt }) => {
             <input type="file" name="photo" onChange={handleChangePhoto} />
           </label>
           <div>
-            <Link to="/">CANCEL</Link>
             <button disabled={isFormInvalid() || isSubmitted}>
               {!isSubmitted ? 'SIGN UP' : '🚀 Sending...'}
             </button>
+            <Link to="/">CANCEL</Link>
           </div>
         </form>
       </section>
