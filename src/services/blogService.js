@@ -17,4 +17,15 @@ async function index() {
   }
 }
 
-export { index }
+async function show(blogId) {
+  try {
+    const res = await fetch(`${BASE_URL}/${blogId}`, {
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
+    })
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { index, show }

@@ -1,14 +1,14 @@
+// components
+import BlogCard from '../../components/BlogCard/BlogCard'
+
 // css
 import styles from './Bloglist.module.css'
 
 const BlogList = (props) => {
-  console.log(props);
   return (
     <main className={`${styles.container} ${styles.main}`}>
       {props.blogs.map(blog => (
-        <p key={blog._id}>
-          {blog.title}
-        </p>
+        <BlogCard key={blog._id} blog={blog} />
       ))}
     </main>
   )

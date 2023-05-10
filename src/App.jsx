@@ -8,6 +8,7 @@ import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Logout from './pages/Logout/Logout'
 import BlogList from './pages/BlogList/BlogList'
+import BlogDetails from './pages/BlogDetails/BlogDetails'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -54,8 +55,15 @@ function App() {
               <BlogList blogs={blogs}/>
             </ProtectedRoute>
           }
-        >
-        </Route>
+        />
+        <Route 
+          path="/blogs/:blogId"
+          element={
+            <ProtectedRoute user={user}>
+              <BlogDetails user={user} />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/auth/logout" element={<Logout />} />
         <Route
           path="/auth/signup"

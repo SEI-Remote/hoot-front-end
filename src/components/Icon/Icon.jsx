@@ -12,7 +12,7 @@ import sports from '../../assets/icons/sports.svg'
 import create from '../../assets/icons/create.svg'
 import comments from '../../assets/icons/comments.svg'
 import calendar from '../../assets/icons/calendar.svg'
-import televison from '../../assets/icons/television.svg'
+import television from '../../assets/icons/television.svg'
 
 const Icon = ({ category }) => {
   const icons = {
@@ -29,7 +29,7 @@ const Icon = ({ category }) => {
     Create: create,
     Calendar: calendar,
     Comments: comments,
-    Television: televison,
+    Television: television,
   }
 
   return (
