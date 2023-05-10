@@ -17,7 +17,7 @@ const EditBlog = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    // Update this line shortly...
+    props.handleUpdateBlog(formData)
   }
 
   return (

@@ -86,11 +86,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/blogs/edit" element={
-          <ProtectedRoute user={user}>
-            <EditBlog handleUpdateBlog={handleUpdateBlog} />
-          </ProtectedRoute>
-        } />
+        <Route 
+          path="/blogs/:blogId/edit" 
+          element={
+            <ProtectedRoute user={user}>
+              <EditBlog handleUpdateBlog={handleUpdateBlog} />
+            </ProtectedRoute>
+          } 
+        />
         <Route path="/auth/logout" element={<Logout />} />
         <Route
           path="/auth/signup"
