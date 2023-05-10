@@ -47,12 +47,13 @@ const Signup = ({ handleAuthEvt }) => {
       isFileInvalid = true
     }
     
+    setMessage(errMsg)
+    
     if (isFileInvalid) {
       imgInputRef.current.value = null
       return
     }
     
-    setMessage(errMsg)
     setPhotoData({ photo: evt.target.files[0] })
   }
 
