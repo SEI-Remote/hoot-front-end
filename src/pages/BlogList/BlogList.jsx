@@ -2,7 +2,7 @@
 import BlogCard from '../../components/BlogCard/BlogCard'
 
 // css
-import styles from './Bloglist.module.css'
+import styles from './BlogList.module.css'
 
 const BlogList = (props) => {
   return (
