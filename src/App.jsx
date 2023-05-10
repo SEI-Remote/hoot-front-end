@@ -9,6 +9,7 @@ import Landing from './pages/Landing/Landing'
 import Logout from './pages/Logout/Logout'
 import BlogList from './pages/BlogList/BlogList'
 import BlogDetails from './pages/BlogDetails/BlogDetails'
+import NewBlog from './pages/NewBlog/NewBlog'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -43,6 +44,18 @@ function App() {
     setUser(authService.getUser())
   }
 
+  const handleAddBlog = async (blogFormData) => {
+    const newBlog = await blogService.create(blogFormData)
+    setBlogs([newBlog, ...blogs])
+    navigate('/blogs')
+  }
+
+  const handleUpdateBlog = async (blogFormData) => {
+    const updatedBlog = await blogService.update(blogFormData)
+    setBlogs(blogs.map(b => blogFormData._id === b._id ? updatedBlog : b))
+    navigate('/blogs')
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -64,6 +77,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/blogs/new" 
+          element={
+            <ProtectedRoute user={user}>
+              <NewBlog handleAddBlog={handleAddBlog} />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/auth/logout" element={<Logout />} />
         <Route
           path="/auth/signup"
