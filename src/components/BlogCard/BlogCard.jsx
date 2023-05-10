@@ -10,7 +10,7 @@ import styles from './BlogCard.module.css'
 
 const BlogCard = ({ blog }) => {
   return (
-    <Link to={`/blogs/${blog._id}`}>
+    <Link to={`/blogs/${blog._id}`} state={blog}>
       <article className={styles.container}>
         <header>
           <span>

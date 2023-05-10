@@ -10,6 +10,7 @@ import Logout from './pages/Logout/Logout'
 import BlogList from './pages/BlogList/BlogList'
 import BlogDetails from './pages/BlogDetails/BlogDetails'
 import NewBlog from './pages/NewBlog/NewBlog'
+import EditBlog from './pages/EditBlog/EditBlog'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -85,7 +86,11 @@ function App() {
             </ProtectedRoute>
           }
         />
-
+        <Route path="/blogs/edit" element={
+          <ProtectedRoute user={user}>
+            <EditBlog handleUpdateBlog={handleUpdateBlog} />
+          </ProtectedRoute>
+        } />
         <Route path="/auth/logout" element={<Logout />} />
         <Route
           path="/auth/signup"

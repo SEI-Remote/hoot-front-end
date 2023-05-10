@@ -1,6 +1,6 @@
 // npm modules
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 // pages
 import Loading from "../Loading/Loading"
@@ -39,6 +39,12 @@ const BlogDetails = (props) => {
         </header>
         <span>
           <AuthorInfo content={blog} />
+          {blog.author._id === props.user.profile &&
+            <>
+              <Link to={`/blogs/${blogId}/edit`} state={blog}>Edit</Link>
+            </>
+
+          }
         </span>
         <p>{blog.text}</p>
       </article>
