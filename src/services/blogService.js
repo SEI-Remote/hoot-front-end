@@ -59,7 +59,42 @@ async function update(blogFormData) {
   } catch (error) {
     console.log(error)
   }
-  
 }
 
-export { index, show, create, update }
+async function deleteBlog(blogId) {
+  try {
+    const res = await fetch(`${BASE_URL}/${blogId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
+    })
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function createComment(blogId, commentFormData) {
+  try {
+    // POST http://localhost:3001/api/blogs/:blogId/comments
+    const res = await fetch(`${BASE_URL}/${blogId}/comments`, {
+      method: 'POST',
+      headers: { 
+        'Authorization': `Bearer ${tokenService.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(commentFormData)
+    })
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { 
+  index, 
+  show, 
+  create, 
+  update,
+  deleteBlog as delete,
+  createComment
+}

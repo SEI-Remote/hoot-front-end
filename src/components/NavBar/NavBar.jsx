@@ -8,7 +8,7 @@ import logo from '../../assets/branding/logo.svg'
 import styles from './NavBar.module.css'
 
 const NavBar = ({ user, handleLogout }) => {
-
+  
   const publicLinks = (
     <ul>
       <li><NavLink to="/auth/login">LOG IN</NavLink></li>
