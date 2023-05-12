@@ -34,7 +34,6 @@ function App() {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
       if (coords.lat) return
-      console.log(position)
       setCoords({lat: position.coords.latitude, lng: position.coords.longitude})
     }, err => {
       console.log(err)
