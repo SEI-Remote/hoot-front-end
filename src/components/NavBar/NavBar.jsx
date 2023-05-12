@@ -7,7 +7,10 @@ import logo from '../../assets/branding/logo.svg'
 // css
 import styles from './NavBar.module.css'
 
-const NavBar = ({ user, handleLogout }) => {
+// components
+import WeatherInfo from '../WeatherInfo/WeatherInfo'
+
+const NavBar = ({ user, handleLogout, weather }) => {
   
   const publicLinks = (
     <ul>
@@ -23,6 +26,11 @@ const NavBar = ({ user, handleLogout }) => {
       <li>
         <NavLink to="/auth/logout" onClick={handleLogout}>LOG OUT</NavLink>
       </li>
+      {weather.weather && 
+        <li>
+          <WeatherInfo weather={weather} />
+        </li>
+      }
     </ul>
   )
 
