@@ -38,7 +38,6 @@ function App() {
   useEffect(() => {
     const fetchAllBlogs = async () => {
       const data = await blogService.index()
-      console.log('Blog Data:', data)
       setBlogs(data)
     }
     if (user) fetchAllBlogs()
