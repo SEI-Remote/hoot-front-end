@@ -9,6 +9,7 @@ import Landing from './pages/Landing/Landing'
 import Logout from './pages/Logout/Logout'
 import BlogList from './pages/BlogList/BlogList'
 import BlogDetails from './pages/BlogDetails/BlogDetails'
+import NewBlog from './pages/NewBlog/NewBlog'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -33,6 +34,12 @@ function App() {
 
   const handleAuthEvt = () => {
     setUser(authService.getUser())
+  }
+
+  const handleAddBlog = async blogFormData => {
+    const newBlog = await blogService.create(blogFormData)
+    setBlogs([newBlog, ...blogs])
+    navigate('/blogs')
   }
 
   useEffect(() => {
@@ -70,6 +77,14 @@ function App() {
           element={
             <ProtectedRoute user={user}>
               <BlogDetails user={user} />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path='/blogs/new'
+          element={
+            <ProtectedRoute user={user}>
+              <NewBlog handleAddBlog={handleAddBlog} />
             </ProtectedRoute>
           }
         />
