@@ -84,7 +84,7 @@ function App() {
           path='/blogs/new'
           element={
             <ProtectedRoute user={user}>
-              <NewBlog />
+              <NewBlog handleAddBlog={handleAddBlog} />
             </ProtectedRoute>
           }
         />
