@@ -1,10 +1,11 @@
 // npm modules
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 // components
 import Loading from "../Loading/Loading"
 import AuthorInfo from "../../components/AuthorInfo/AuthorInfo"
+import Icon from "../../components/Icon/Icon"
 
 // services
 import * as blogService from '../../services/blogService'
@@ -34,6 +35,13 @@ const BlogDetails = (props) => {
           <h1>{blog.title}</h1>
           <span>
             <AuthorInfo content={blog} />
+            {blog.author._id === props.user.profile &&
+              <>
+                <Link to={`/blogs/${blog._id}/edit`} state={blog}>
+                  <Icon category='Edit' />
+                </Link>
+              </>
+            }
           </span>
         </header>
         <p>{blog.text}</p>
