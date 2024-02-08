@@ -58,10 +58,24 @@ async function update(blogFormData) {
   }
 }
 
+async function deleteBlog(blogId) {
+  try {
+    const res = await fetch(`${BASE_URL}/${blogId}`, {
+      method: 'DELETE',
+      headers: {'Authorization': `Bearer ${tokenService.getToken()}`}
+    })
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export {
   index,
   show,
   create,
   update,
-
+  deleteBlog
 }
+
+////// This line of code, from the first / to the last / is 80 characters //////

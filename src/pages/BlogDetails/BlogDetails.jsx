@@ -40,6 +40,8 @@ const BlogDetails = (props) => {
                 <Link to={`/blogs/${blog._id}/edit`} state={blog}>
                   <Icon category='Edit' />
                 </Link>
+                <button onClick={() => props.handleDeleteBlog(blog._id)}><Icon category='Trash'/></button>
+                
               </>
             }
           </span>

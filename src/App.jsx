@@ -57,6 +57,13 @@ function App() {
     navigate('/blogs')
   }
 
+  const handleDeleteBlog = async (blogId) => {
+    const deletedBlog = await blogService.deleteBlog(blogId)
+    setBlogs(blogs.filter(b => b._id !== deletedBlog._id))
+    navigate('/blogs')
+  }
+
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -83,7 +90,7 @@ function App() {
           path='/blogs/:blogId'
           element={
             <ProtectedRoute user={user}>
-              <BlogDetails user={user} />
+              <BlogDetails handleDeleteBlog={handleDeleteBlog} user={user} />
             </ProtectedRoute>
           }
         />
