@@ -59,7 +59,7 @@ function App() {
         <Route 
           path='/blogs' element={
             <ProtectedRoute user={user}>
-              <BlogList />
+              <BlogList blogs={blogs} />
             </ProtectedRoute>
           }
         />
