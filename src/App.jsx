@@ -7,6 +7,7 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Logout from './pages/Logout/Logout'
+import BlogList from './pages/BlogList/BlogList'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -44,6 +45,13 @@ function App() {
         <Route
           path="/auth/login"
           element={<Login handleAuthEvt={handleAuthEvt} />}
+        />
+        <Route 
+          path='/blogs' element={
+            <ProtectedRoute user={user}>
+              <BlogList />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </>
