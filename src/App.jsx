@@ -44,6 +44,12 @@ function App() {
     if (user) fetchAllBlogs()
   }, [user])
 
+  const handleAddBlog = async blogFormData => {
+    const newBlog = await blogService.create(blogFormData)
+    setBlogs([newBlog, ...blogs])
+    navigate('/blogs')
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -75,7 +81,7 @@ function App() {
         <Route 
           path='/blogs/new' element={
             <ProtectedRoute user={user}>
-              <NewBlog />
+              <NewBlog handleAddBlog={handleAddBlog} />
             </ProtectedRoute>
           }
         />

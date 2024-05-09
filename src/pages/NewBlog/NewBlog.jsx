@@ -13,8 +13,7 @@ const NewBlog = (props) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    // calling a 'handleAddBlog' function that
-    // passes formData back to the App component
+    props.handleAddBlog(formData)
   }
 
   const handleChange = evt => {
