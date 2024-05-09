@@ -1,5 +1,5 @@
 // npm modules
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
 // pages
@@ -7,6 +7,11 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Logout from './pages/Logout/Logout'
+import BlogList from './pages/BlogList/BlogList'
+import BlogDetails from './pages/BlogDetails/BlogDetails'
+import NewBlog from './pages/NewBlog/NewBlog'
+import EditBlog from './pages/EditBlog/EditBlog'
+import EditComment from './pages/EditComment/EditComment'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -14,12 +19,14 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 // services
 import * as authService from './services/authService'
+import * as blogService from './services/blogService'
 
 // styles
 import './App.css'
 
 function App() {
   const [user, setUser] = useState(authService.getUser())
+  const [blogs, setBlogs] = useState([])
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -29,6 +36,32 @@ function App() {
 
   const handleAuthEvt = () => {
     setUser(authService.getUser())
+  }
+
+  useEffect(() => {
+    const fetchAllBlogs = async () => {
+      const blogsData = await blogService.index()
+      setBlogs(blogsData) // <-- Set state with the data returned
+    }
+    if (user) fetchAllBlogs() // <-- Only run the function if we have a user
+  }, [user])
+
+  const handleAddBlog = async (blogFormData) => {
+    const newBlog = await blogService.create(blogFormData)
+    setBlogs([newBlog, ...blogs])
+    navigate('/blogs')
+  }
+
+  const handleUpdateBlog = async (blogFormData) => {
+    const updatedBlog = await blogService.update(blogFormData)
+    setBlogs(blogs.map((blog) => updatedBlog._id === blog._id ? updatedBlog : blog))
+    navigate('/blogs')
+  }
+
+  const handleDeleteBlog = async (blogId) => {
+    const deletedBlog = await blogService.delete(blogId)
+    setBlogs(blogs.filter(b => b._id !== deletedBlog._id))
+    navigate('/blogs')
   }
 
   return (
@@ -44,6 +77,46 @@ function App() {
         <Route
           path="/auth/login"
           element={<Login handleAuthEvt={handleAuthEvt} />}
+        />
+        <Route
+          path="/blogs"
+          element={
+            <ProtectedRoute user={user}>
+              <BlogList blogs={blogs} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/blogs/:blogId"
+          element={
+            <ProtectedRoute user={user}>
+              <BlogDetails user={user} handleDeleteBlog={handleDeleteBlog} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/blogs/new" 
+          element={
+            <ProtectedRoute user={user}>
+              <NewBlog handleAddBlog={handleAddBlog} />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/blogs/edit" 
+          element={
+            <ProtectedRoute user={user}>
+              <EditBlog handleUpdateBlog={handleUpdateBlog} />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/blogs/:blogId/comments/edit" 
+          element={
+            <ProtectedRoute user={user}>
+              <EditComment />
+            </ProtectedRoute>
+          } 
         />
       </Routes>
     </>
