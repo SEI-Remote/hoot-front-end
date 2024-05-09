@@ -1,10 +1,11 @@
 // npm modules
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, NavLink } from 'react-router-dom'
 
 // components
 import Loading from '../Loading/Loading'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo'
+import Icon from '../../components/Icon/Icon'
 
 // css
 import styles from './BlogDetails.module.css'
@@ -12,7 +13,7 @@ import styles from './BlogDetails.module.css'
 // services
 import * as blogService from '../../services/blogService'
 
-const BlogDetails = () => {
+const BlogDetails = (props) => {
   const [blog, setBlog] = useState(null)
   const { blogId } = useParams()
 
@@ -34,6 +35,16 @@ const BlogDetails = () => {
           <h1>{blog.title}</h1>
           <span>
             <AuthorInfo content={blog} />
+            {blog.author._id === props.user.profile &&
+              <>
+                <NavLink to='/blogs/edit' state={blog}>
+                  <Icon category='Edit' />
+                </NavLink>
+                <button>
+                  <Icon category='Trash' />
+                </button>
+              </>
+            }
           </span>
         </header>
         <p>{blog.text}</p>

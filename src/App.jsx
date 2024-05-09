@@ -10,6 +10,7 @@ import Logout from './pages/Logout/Logout'
 import BlogList from './pages/BlogList/BlogList'
 import BlogDetails from './pages/BlogDetails/BlogDetails'
 import NewBlog from './pages/NewBlog/NewBlog'
+import EditBlog from './pages/EditBlog/EditBlog'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -50,6 +51,12 @@ function App() {
     navigate('/blogs')
   }
 
+  const handleUpdateBlog = async blogFormData => {
+    const updatedBlog = await blogService.update(blogFormData)
+    setBlogs(blogs.map(blog => updatedBlog._id === blog._id ? updatedBlog : blog))
+    navigate('/blogs')
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -82,6 +89,13 @@ function App() {
           path='/blogs/new' element={
             <ProtectedRoute user={user}>
               <NewBlog handleAddBlog={handleAddBlog} />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path='/blogs/edit' element={
+            <ProtectedRoute user={user}>
+              <EditBlog handleUpdateBlog={handleUpdateBlog} />
             </ProtectedRoute>
           }
         />

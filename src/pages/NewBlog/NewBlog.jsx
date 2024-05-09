@@ -23,6 +23,7 @@ const NewBlog = (props) => {
   return (
     <main className={styles.container}>
       <form onSubmit={handleSubmit}>
+        <h1>New Blog</h1>
         <label htmlFor="title-input">Title</label>
         <input 
           required
