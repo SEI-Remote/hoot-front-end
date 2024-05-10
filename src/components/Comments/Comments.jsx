@@ -1,7 +1,18 @@
-const Comments = () => {
+import CommentCard from "../CommentCard/CommentCard"
+
+const Comments = (props) => {
+  
+  if (!props.comments.length) return <h4>No Comments</h4>
+  
   return (
     <>
-      <h1>Comments</h1>
+      {props.comments.map(comment =>
+        <CommentCard
+          key={comment._id}
+          comment={comment}
+          user={props.user}
+        />
+      )}
     </>
   )
 }
