@@ -23,9 +23,10 @@ const NewComment = (props) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
+      <h1>New Comment</h1>
       <textarea 
         required
-        name="text" 
+        name="text"
         value={formData.text}
         placeholder='Add a Comment'
         onChange={handleChange}
