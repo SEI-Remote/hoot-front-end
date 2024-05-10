@@ -32,6 +32,15 @@ const BlogDetails = (props) => {
     setBlog({...blog, comments: [...blog.comments, newComment]})
   }
 
+  const handleDeleteComment = async (blogId, commentId) => {
+    await blogService.deleteComment(blogId, commentId)
+    setBlog({ 
+      ...blog, 
+      comments: blog.comments.filter(c => c._id !== commentId) 
+    })
+  }
+
+
   if (!blog) return <Loading />
 
   return (
@@ -63,6 +72,7 @@ const BlogDetails = (props) => {
           comments={blog.comments} 
           user={props.user}
           blogId={blogId}
+          handleDeleteComment={handleDeleteComment}
         />
       </section>
     </main>
