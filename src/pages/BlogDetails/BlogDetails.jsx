@@ -6,6 +6,7 @@ import { useParams, NavLink } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo'
 import Icon from '../../components/Icon/Icon'
+import NewComment from '../../components/NewComment/NewComment'
 
 // css
 import styles from './BlogDetails.module.css'
@@ -24,6 +25,11 @@ const BlogDetails = (props) => {
     }
     fetchBlog()
   }, [blogId])
+
+  const handleAddComment = async commentFormData => {
+    const newComment = await blogService.createComment(blogId, commentFormData)
+    setBlog({...blog, comments: [...blog.comments, newComment]})
+  }
 
   if (!blog) return <Loading />
 
@@ -51,6 +57,7 @@ const BlogDetails = (props) => {
       </article>
       <section>
         <h1>Comments</h1>
+        <NewComment handleAddComment={handleAddComment} />
       </section>
     </main>
   )
