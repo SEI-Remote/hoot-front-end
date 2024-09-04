@@ -45,8 +45,25 @@ async function create(blogFormData) {
   }
 }
 
+async function update(blogFormData) {
+  try {
+    const res = await fetch(`${BASE_URL}/${blogFormData._id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${tokenService.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(blogFormData)
+    })
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export {
   index,
   show,
-  create
+  create,
+  update
 }
