@@ -1,5 +1,5 @@
 // npm modules
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
 // pages
@@ -7,6 +7,7 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Logout from './pages/Logout/Logout'
+import BlogList from './pages/BlogList/BlogList'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -21,6 +22,15 @@ import './App.css'
 function App() {
   const [user, setUser] = useState(authService.getUser())
   const navigate = useNavigate()
+  const [blogs, setBlogs] = useState([])
+
+  useEffect(() => {
+    const fetchAllBlogs = async () => {
+      // const blogsData = callToServiceFunction
+      // setBlogs(blogsData)
+    }
+    if (user) fetchAllBlogs()
+  }, [user])
 
   const handleLogout = () => {
     authService.logout()
@@ -44,6 +54,14 @@ function App() {
         <Route
           path="/auth/login"
           element={<Login handleAuthEvt={handleAuthEvt} />}
+        />
+        <Route 
+          path='/blogs'
+          element={
+            <ProtectedRoute user={user} >
+              <BlogList />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </>
